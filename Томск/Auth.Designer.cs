@@ -38,7 +38,6 @@ namespace Томск
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Томск.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(40, 60);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(100, 100);

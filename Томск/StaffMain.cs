@@ -24,6 +24,7 @@ namespace Томск
             wash = new Washing();
             var washings = ConnectionHelper.ConnObj.Washing.ToList();
             dataGridView1.DataSource = washings;
+            dataGridView2.DataSource = ConnectionHelper.ConnObj.Washing.ToList();
         }
     }
 }

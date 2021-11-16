@@ -86,6 +86,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="NewStaff.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewStaff.Designer.cs">
+      <DependentUpon>NewStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewWash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewWash.Designer.cs">
+      <DependentUpon>NewWash.cs</DependentUpon>
+    </Compile>
     <Compile Include="Powders.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -106,13 +118,28 @@
     <Compile Include="Washing.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="WashStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WashStatus.Designer.cs">
+      <DependentUpon>WashStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="_PR_315__18_56DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>_PR_315__18_56DataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminMain.resx">
+      <DependentUpon>AdminMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Auth.resx">
       <DependentUpon>Auth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewStaff.resx">
+      <DependentUpon>NewStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewWash.resx">
+      <DependentUpon>NewWash.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -126,6 +153,9 @@
     </Compile>
     <EmbeddedResource Include="StaffMain.resx">
       <DependentUpon>StaffMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WashStatus.resx">
+      <DependentUpon>WashStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="Model1.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
