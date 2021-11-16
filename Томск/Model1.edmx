@@ -1,0 +1,316 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="IdMachine" />
+          </Key>
+          <Property Name="IdMachine" Type="int" Nullable="false" />
+          <Property Name="WashMachine" Type="nvarchar" MaxLength="50" />
+          <Property Name="Propety" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="Powders">
+          <Key>
+            <PropertyRef Name="PowderId" />
+          </Key>
+          <Property Name="PowderId" Type="int" Nullable="false" />
+          <Property Name="PowderName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="int" Nullable="false" />
+          <Property Name="StfLastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StfFirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="StfPatronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="StfLogin" Type="nvarchar" MaxLength="50" />
+          <Property Name="StfPassword" Type="nvarchar" MaxLength="50" />
+          <Property Name="StfRole" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Washing">
+          <Key>
+            <PropertyRef Name="IDWahsing" />
+          </Key>
+          <Property Name="IDWahsing" Type="int" Nullable="false" />
+          <Property Name="WashingStatus" Type="nchar" MaxLength="10" />
+          <Property Name="DryingHeaving" Type="bit" />
+          <Property Name="Powder" Type="int" />
+          <Property Name="MachineId" Type="int" />
+          <Property Name="StaffId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Washing_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="IdMachine" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Washing_Powders">
+          <End Role="Powders" Type="Self.Powders" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Powders">
+              <PropertyRef Name="PowderId" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="Powder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Washing_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="Machines" EntityType="Self.Machines" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Powders" EntityType="Self.Powders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Washing" EntityType="Self.Washing" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Washing_Machines" Association="Self.FK_Washing_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Washing_Powders" Association="Self.FK_Washing_Powders">
+            <End Role="Powders" EntitySet="Powders" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Washing_Staff" Association="Self.FK_Washing_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Machines">
+          <Key>
+            <PropertyRef Name="IdMachine" />
+          </Key>
+          <Property Name="IdMachine" Type="Int32" Nullable="false" />
+          <Property Name="WashMachine" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Propety" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="Washing" Relationship="Self.FK_Washing_Machines" FromRole="Machines" ToRole="Washing" />
+        </EntityType>
+        <EntityType Name="Powders">
+          <Key>
+            <PropertyRef Name="PowderId" />
+          </Key>
+          <Property Name="PowderId" Type="Int32" Nullable="false" />
+          <Property Name="PowderName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Price" Type="Int32" />
+          <NavigationProperty Name="Washing" Relationship="Self.FK_Washing_Powders" FromRole="Powders" ToRole="Washing" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="StaffId" />
+          </Key>
+          <Property Name="StaffId" Type="Int32" Nullable="false" />
+          <Property Name="StfLastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StfFirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StfPatronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StfLogin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StfPassword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StfRole" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Washing" Relationship="Self.FK_Washing_Staff" FromRole="Staff" ToRole="Washing" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Washing">
+          <Key>
+            <PropertyRef Name="IDWahsing" />
+          </Key>
+          <Property Name="IDWahsing" Type="Int32" Nullable="false" />
+          <Property Name="WashingStatus" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DryingHeaving" Type="Boolean" />
+          <Property Name="Powder" Type="Int32" />
+          <Property Name="MachineId" Type="Int32" />
+          <Property Name="StaffId" Type="Int32" />
+          <NavigationProperty Name="Machines" Relationship="Self.FK_Washing_Machines" FromRole="Washing" ToRole="Machines" />
+          <NavigationProperty Name="Powders" Relationship="Self.FK_Washing_Powders" FromRole="Washing" ToRole="Powders" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Washing_Staff" FromRole="Washing" ToRole="Staff" />
+        </EntityType>
+        <Association Name="FK_Washing_Machines">
+          <End Role="Machines" Type="Self.Machines" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Machines">
+              <PropertyRef Name="IdMachine" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="MachineId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Washing_Powders">
+          <End Role="Powders" Type="Self.Powders" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Powders">
+              <PropertyRef Name="PowderId" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="Powder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Washing_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Washing" Type="Self.Washing" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="StaffId" />
+            </Principal>
+            <Dependent Role="Washing">
+              <PropertyRef Name="StaffId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Machines" EntityType="Self.Machines" />
+          <EntitySet Name="Powders" EntityType="Self.Powders" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Washing" EntityType="Self.Washing" />
+          <AssociationSet Name="FK_Washing_Machines" Association="Self.FK_Washing_Machines">
+            <End Role="Machines" EntitySet="Machines" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Washing_Powders" Association="Self.FK_Washing_Powders">
+            <End Role="Powders" EntitySet="Powders" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Washing_Staff" Association="Self.FK_Washing_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Washing" EntitySet="Washing" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Machines">
+            <EntityTypeMapping TypeName="Model.Machines">
+              <MappingFragment StoreEntitySet="Machines">
+                <ScalarProperty Name="IdMachine" ColumnName="IdMachine" />
+                <ScalarProperty Name="WashMachine" ColumnName="WashMachine" />
+                <ScalarProperty Name="Propety" ColumnName="Propety" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Powders">
+            <EntityTypeMapping TypeName="Model.Powders">
+              <MappingFragment StoreEntitySet="Powders">
+                <ScalarProperty Name="PowderId" ColumnName="PowderId" />
+                <ScalarProperty Name="PowderName" ColumnName="PowderName" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="Model.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+                <ScalarProperty Name="StfLastName" ColumnName="StfLastName" />
+                <ScalarProperty Name="StfFirstName" ColumnName="StfFirstName" />
+                <ScalarProperty Name="StfPatronymic" ColumnName="StfPatronymic" />
+                <ScalarProperty Name="StfLogin" ColumnName="StfLogin" />
+                <ScalarProperty Name="StfPassword" ColumnName="StfPassword" />
+                <ScalarProperty Name="StfRole" ColumnName="StfRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Washing">
+            <EntityTypeMapping TypeName="Model.Washing">
+              <MappingFragment StoreEntitySet="Washing">
+                <ScalarProperty Name="IDWahsing" ColumnName="IDWahsing" />
+                <ScalarProperty Name="WashingStatus" ColumnName="WashingStatus" />
+                <ScalarProperty Name="DryingHeaving" ColumnName="DryingHeaving" />
+                <ScalarProperty Name="Powder" ColumnName="Powder" />
+                <ScalarProperty Name="MachineId" ColumnName="MachineId" />
+                <ScalarProperty Name="StaffId" ColumnName="StaffId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
